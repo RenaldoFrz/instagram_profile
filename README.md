@@ -1,6 +1,6 @@
-# instagram_profile
+# Instagram Profile Clone
 
-A new Flutter project.
+A new Flutter project for Independent Study at Gits.id
 
 ## Getting Started
 

@@ -8,7 +8,7 @@ A basic flutter project implemented for Independent Study at Gits.id
 
 ## \* Additional - Sign Up Page
 
-![Signup Interface](https://github.com/RenaldoFrz/instagram_profile/blob/main/assets/images/Result_Signup.png?raw=true)
+![Aplication Interface](https://github.com/RenaldoFrz/instagram_profile/blob/main/assets/images/Result_Signup.png?raw=true)
 
 ## Resources
 

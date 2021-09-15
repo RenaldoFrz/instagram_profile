@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:instagram_profile/theme/colors.dart';
-import 'package:instagram_profile/util/account_images_json.dart';
-import 'package:instagram_profile/util/constant.dart';
-import 'package:instagram_profile/util/highlight_json.dart';
+
+import '../theme/colors.dart';
+import '../util/account_images_json.dart';
+import '../util/constant.dart';
+import '../util/highlight_json.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({ Key? key }) : super(key: key);

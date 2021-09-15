@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:instagram_profile/theme/colors.dart';
+import 'package:flutter/services.dart';
+
+import '../theme/colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({ Key? key }) : super(key: key);
@@ -92,6 +94,8 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 15),
             TextFormField(
               controller: myFullname,
+              keyboardType: TextInputType.text,
+              maxLines: 1,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Full Name',
@@ -139,6 +143,7 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(height: 15),
             TextFormField(
               controller: myEmail,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Email',
@@ -198,31 +203,46 @@ class _LoginPageState extends State<LoginPage> {
                     gender = 'Female';
                     break;
                 }
-                if (isChecked == false){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Please check the term and condition')),
+                if(_formKey.currentState!.validate() && isChecked == true){
+                  showDialog(
+                    barrierDismissible: false,
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Text(
+                          "Succesfullly Registered!\n\nFullname: \n"+ myFullname.text + "\nGender: \n" + gender + "\nEmail: \n" + myEmail.text +  "\nUsername: \n" + myUsername.text,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: (){
+                              clearTextField();
+                              Navigator.pop(context);
+                            },
+                            child: Text('OK')
+                          )
+                        ],
+                      );
+                    },
                   );
                 } else {
-                  if (_formKey.currentState!.validate()) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          // Retrieve the text the that user has entered by using the
-                          // TextEditingController.
-                          content: Text(
-                            "Succesfullly Registered!\n\nFullname: \n"+ myFullname.text + "\nGender: \n" + gender + "\nEmail: \n" + myEmail.text +  "\nUsername: \n" + myUsername.text,
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          actions: [
-                            TextButton(onPressed: (){
-                              Navigator.pushNamed(context, '/profile');
-                            }, child: Text('OK'))
-                          ],
-                        );
-                      },
-                    );
-                  }
+                   showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Text(
+                          "Something missing",
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        actions: [
+                          TextButton(onPressed: (){
+                            clearTextField();
+                            Navigator.pop(context);
+                          }, child: Text('OK'))
+                        ],
+                      );
+                    },
+                  );
                 }
               }, 
               child: 
@@ -233,5 +253,11 @@ class _LoginPageState extends State<LoginPage> {
        )
       ),
     );
+  }
+
+  void clearTextField(){
+    myFullname.clear();
+    myEmail.clear();
+    myUsername.clear();
   }
 }
